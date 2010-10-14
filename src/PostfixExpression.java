@@ -31,4 +31,11 @@ public class PostfixExpression {
         return stack.pop();
     }
     
+    private boolean isOperator(String argumento) {
+       return argumento.equals("*") ||
+                    argumento.equals("+") ||
+                    argumento.equals("/") || 
+                    argumento.equals("-")
+    }
+    
 }
