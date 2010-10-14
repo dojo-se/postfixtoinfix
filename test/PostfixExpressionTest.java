@@ -9,8 +9,14 @@ public class PostfixExpressionTest {
     
     @Test
     public void test_34Mult() {
-        postfix = new PostfixExpression("3 * 4");
+        postfix = new PostfixExpression("3 4 *");
         assertEquals("3 * 4", postfix.toInfix());
+    }
+    
+    @Test
+    public void test_34Sum() {
+        postfix = new PostfixExpression("3 4 +");
+        assertEquals("3 + 4", postfix.toInfix());
     }
     
 }

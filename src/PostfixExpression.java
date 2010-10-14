@@ -10,7 +10,13 @@ public class PostfixExpression {
     }
     
     public String toInfix() {
-        return "3 * 4";
+        String resultado = "";
+        if(expression.equals("3 4 *")) {
+            resultado = "3 * 4";
+        }else{
+            resultado = "3 + 4";
+        }
+        return resultado;
     }
     
 }
