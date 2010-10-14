@@ -18,5 +18,10 @@ public class PostfixExpressionTest {
         postfix = new PostfixExpression("3 4 +");
         assertEquals("3 + 4", postfix.toInfix());
     }
-    
+
+    @Test
+    public void test_346SumTimes() {
+        postfix = new PostfixExpression("3 4 + 6 *");
+        assertEquals("3 + 4 * 6", postfix.toInfix());
+    }    
 }
