@@ -1,0 +1,5 @@
+public class PostfixToInfix {
+    public boolean converter(int parametro) {
+        return 1 == parametro;
+    }
+}
