@@ -1,4 +1,4 @@
-import java.util.Stack;
+import java.util.*;
 
 public class PostfixExpression {
 
@@ -11,11 +11,26 @@ public class PostfixExpression {
     
     public String toInfix() {
         String resultado = "";
-        if(expression.equals("3 4 *")) {
-            resultado = "3 * 4";
-        }else{
-            resultado = "3 + 4";
+        
+        String[] exprArray = expression.split(" ");
+        String auxExp;
+        for(String token : exprArray) {
+            if (
+                    token.equals("*") ||
+                    token.equals("+") ||
+                    token.equals("/") || 
+                    token.equals("-")
+               )
+            {
+                auxExp = "";
+                auxExp = " " + token + " " +  stack.pop();
+                auxExp = stack.pop() + auxExp;
+                stack.push(auxExp);
+            }
+            else
+                stack.push(token);                
         }
+        resultado = stack.pop();       
         return resultado;
     }
     
