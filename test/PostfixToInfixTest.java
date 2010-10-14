@@ -16,4 +16,5 @@ public class PostfixToInfixTest {
     public void test_34Mult() {
         assertEquals("3 * 4", postfixToInfix.converter("3 4 *"));
     }
+    
 }
