@@ -10,11 +10,9 @@ public class PostfixExpression {
     }
     
     public String toInfix() {
-        String resultado = "";
-        
-        String[] exprArray = expression.split(" ");
-        String auxExp;
-        for(String token : exprArray) {
+        String[] argumentos = expression.split(" ");
+        String infixExpression = "";
+        for(String token : argumentos) {
             if (
                     token.equals("*") ||
                     token.equals("+") ||
@@ -22,16 +20,15 @@ public class PostfixExpression {
                     token.equals("-")
                )
             {
-                auxExp = "";
-                auxExp = " " + token + " " +  stack.pop();
-                auxExp = stack.pop() + auxExp;
-                stack.push(auxExp);
+                infixExpression = " " + token + " " +  stack.pop();
+                infixExpression = stack.pop() + infixExpression;
+                stack.push(infixExpression);
             }
             else
                 stack.push(token);                
         }
-        resultado = stack.pop();       
-        return resultado;
+ 
+        return stack.pop();
     }
     
 }
