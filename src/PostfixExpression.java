@@ -16,16 +16,19 @@ public class PostfixExpression {
         String lastToken = "";
         for(String token : argumentos) {
             if (isOperator(token)) {
-                if (isOperator(lastToken) && lastOperatorPrecedence != null &&
-                lastOperatorPrecedence < operatorPrecedence(token)) {
-                    infixExpression = " " + token + " (" + stack.pop() + ")";
-                } else {
-                    infixExpression = " " + token + " " + stack.pop();
-                }
-                if(!isOperator(lastToken) && lastOperatorPrecedence != null &&
-                lastOperatorPrecedence < operatorPrecedence(token)){
-                    infixExpression = "(" + stack.pop() + ")" + infixExpression;
+                boolean useParenthesis = lastOperatorPrecedence != null &&
+                lastOperatorPrecedence < operatorPrecedence(token);
+                boolean isRightParenthesis = isOperator(lastToken);
+                if(useParenthesis){
+                    if(isRightParenthesis){
+                        infixExpression = " " + token + " (" + stack.pop() + ")";
+                        infixExpression = stack.pop() + infixExpression;
+                    }else{
+                        infixExpression = " " + token + " " + stack.pop();
+                        infixExpression = "(" + stack.pop() + ")" + infixExpression;
+                    }
                 }else{
+                    infixExpression = " " + token + " " + stack.pop();
                     infixExpression = stack.pop() + infixExpression;
                 }
                 stack.push(infixExpression);
