@@ -42,4 +42,10 @@ public class PostfixExpressionTest {
         postfix = new PostfixExpression("3 4 6 + 6 / 1 + *");
         assertEquals("3 * ((4 + 6) / 6 + 1)", postfix.toInfix());
     }
+    
+    @Test
+    public void test_46SumDiv61Sum() {
+        postfix = new PostfixExpression("4 6 + 6 1 + /");
+        assertEquals("(4 + 6) / (6 + 1)", postfix.toInfix());
+    }
 }
