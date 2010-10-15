@@ -4,6 +4,8 @@ public class PostfixExpression {
 
     private Stack<String> stack = new Stack<String>();    
     private String expression;
+    private String lastToken = "";
+    private Integer lastOperatorPrecedence = null;
     
     public PostfixExpression(String expression) {
         this.expression = expression;
@@ -12,15 +14,10 @@ public class PostfixExpression {
     public String toInfix() {
         String[] argumentos = expression.split(" ");
         String infixExpression = "";
-        Integer lastOperatorPrecedence = null;
-        String lastToken = "";
         for(String token : argumentos) {
             if (isOperator(token)) {
-                boolean useParenthesis = lastOperatorPrecedence != null &&
-                lastOperatorPrecedence < operatorPrecedence(token);
-                boolean isRightParenthesis = isOperator(lastToken);
-                if(useParenthesis){
-                    if(isRightParenthesis){
+                if(useParenthesis(token)){
+                    if(isOperator(lastToken)){
                         infixExpression = " " + token + " (" + stack.pop() + ")";
                         infixExpression = stack.pop() + infixExpression;
                     }else{
@@ -44,6 +41,11 @@ public class PostfixExpression {
     
     private boolean isOperator(String argumento) {
        return argumento.matches("[*/+-]");
+    }
+    
+    private boolean useParenthesis(String arg){
+        return lastOperatorPrecedence != null &&
+                lastOperatorPrecedence < operatorPrecedence(arg);
     }
     
     private int operatorPrecedence(String arg){
