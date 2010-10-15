@@ -13,10 +13,16 @@ public class PostfixExpression {
         String[] argumentos = expression.split(" ");
         String infixExpression = "";
         Integer lastOperatorPrecedence = null;
+        String lastToken = "";
         for(String token : argumentos) {
             if (isOperator(token)) {
-                infixExpression = " " + token + " " +  stack.pop();
-                if(lastOperatorPrecedence != null &&
+                if (isOperator(lastToken) && lastOperatorPrecedence != null &&
+                lastOperatorPrecedence < operatorPrecedence(token)) {
+                    infixExpression = " " + token + " (" + stack.pop() + ")";
+                } else {
+                    infixExpression = " " + token + " " + stack.pop();
+                }
+                if(!isOperator(lastToken) && lastOperatorPrecedence != null &&
                 lastOperatorPrecedence < operatorPrecedence(token)){
                     infixExpression = "(" + stack.pop() + ")" + infixExpression;
                 }else{
@@ -27,6 +33,7 @@ public class PostfixExpression {
             } else {
                 stack.push(token);
             }
+            lastToken = token;
         }
  
         return stack.pop();
