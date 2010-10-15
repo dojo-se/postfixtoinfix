@@ -13,19 +13,13 @@ public class PostfixExpression {
         String[] argumentos = expression.split(" ");
         String infixExpression = "";
         for(String token : argumentos) {
-            if (
-                    token.equals("*") ||
-                    token.equals("+") ||
-                    token.equals("/") || 
-                    token.equals("-")
-               )
-            {
+            if (isOperator(token)) {
                 infixExpression = " " + token + " " +  stack.pop();
                 infixExpression = stack.pop() + infixExpression;
                 stack.push(infixExpression);
+            } else {
+                stack.push(token);
             }
-            else
-                stack.push(token);                
         }
  
         return stack.pop();
@@ -35,7 +29,7 @@ public class PostfixExpression {
        return argumento.equals("*") ||
                     argumento.equals("+") ||
                     argumento.equals("/") || 
-                    argumento.equals("-")
+                    argumento.equals("-");
     }
     
 }
