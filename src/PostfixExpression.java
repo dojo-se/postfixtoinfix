@@ -33,14 +33,11 @@ public class PostfixExpression {
     }
     
     private boolean isOperator(String argumento) {
-       return argumento.equals("*") ||
-                    argumento.equals("+") ||
-                    argumento.equals("/") || 
-                    argumento.equals("-");
+       return argumento.matches("[*/+-]");
     }
     
     private int operatorPrecedence(String arg){
-        if(arg.equals("+") || arg.equals("-")){
+        if (arg.matches("[+-]")) {
             return 0;
         }
         return 1;
